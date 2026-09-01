@@ -60,7 +60,7 @@ export default function Home() {
         {/* Top accent bar */}
         <div className="h-1 w-full bg-tedred" />
 
-        <div className="mx-auto grid max-w-[1400px] gap-0 px-5 pb-0 pt-32 md:grid-cols-12 md:px-10 md:pt-44 lg:pt-48">
+        <div className="mx-auto grid max-w-[1400px] gap-0 px-5 pb-0 pt-24 md:grid-cols-12 md:px-10 md:pt-32 lg:pt-40">
           {/* Left: text column */}
           <div className="md:col-span-7 md:pr-12">
             <motion.p
@@ -143,7 +143,7 @@ export default function Home() {
           >
             {/* Dark gradient behind bulb */}
             <div className="pointer-events-none absolute inset-0 -z-10 mx-auto my-auto h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(230,43,30,0.15),transparent_65%)] blur-2xl" />
-            <div className="flex h-[360px] items-end justify-center sm:h-[440px] md:h-[580px] md:items-center">
+            <div className="flex h-[480px] items-end justify-center sm:h-[560px] md:h-[720px] md:items-center lg:h-[840px]">
               <HeroMascot />
             </div>
           </motion.div>
@@ -201,7 +201,7 @@ export default function Home() {
               <Reveal delay={0.14}>
                 <p className="rule-strong mt-10" />
                 <p className="mt-8 max-w-2xl text-[17px] leading-[1.8] text-graphite">
-                  Six subthemes. Six angles on the same quiet question: what extraordinary thing is
+                    Six subtopics. Six angles on the same quiet question: what extraordinary thing is
                   hiding inside the thing you have already decided is ordinary?
                 </p>
               </Reveal>
@@ -332,7 +332,7 @@ export default function Home() {
                     to="/theme"
                     className="text-[14px] text-white/35 transition-colors duration-500 hover:text-white"
                   >
-                    Read the six subthemes
+                    Read the six subtopics
                   </Link>
                 </div>
               </Reveal>

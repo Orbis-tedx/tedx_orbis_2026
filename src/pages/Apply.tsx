@@ -49,7 +49,7 @@ function validateField(key: FieldKey, form: FormState): string | null {
       if (!v) return "A few honest sentences will do.";
       return countWords(v) > WORD_LIMIT ? `${WORD_LIMIT} word limit.` : null;
     case "subTopic":
-      return v ? null : "Choose the subtheme closest to your idea.";
+      return v ? null : "Choose the subtopic closest to your idea.";
     case "idea": {
       if (!v) return "Tell us the idea — plainly is fine.";
       return countWords(v) > WORD_LIMIT ? `${WORD_LIMIT} word limit.` : null;
@@ -169,7 +169,7 @@ export default function Apply() {
                 Back to event
               </Link>
               <Link to="/theme" className="text-[14px] text-white/35 transition-colors hover:text-white">
-                Re-read the subthemes →
+                Re-read the subtopics →
               </Link>
             </div>
           </motion.div>
@@ -268,7 +268,7 @@ export default function Apply() {
                     </div>
 
                     <div>
-                      <Label htmlFor="about" helper={`Who are you when you're not applying for things? Max ${WORD_LIMIT} words.`}>
+                      <Label htmlFor="about" helper={`Tell us who you are. Max ${WORD_LIMIT} words.`}>
                         Tell us about yourself
                       </Label>
                       <textarea id="about" name="about" rows={7}
@@ -280,7 +280,7 @@ export default function Apply() {
                     </div>
 
                     <div>
-                      <Label htmlFor="subTopic" helper="Pick the subtheme your idea sits closest to.">
+                      <Label htmlFor="subTopic" helper="Pick the subtopic your idea sits closest to.">
                         Sub topic
                       </Label>
                       <div className="relative">
@@ -288,7 +288,7 @@ export default function Apply() {
                           className={`field pr-8 ${errors.subTopic ? "field-error" : ""}`}
                           value={form.subTopic} onChange={(e) => set("subTopic", e.target.value)}
                           aria-invalid={!!errors.subTopic} aria-describedby={errors.subTopic ? "err-sub" : undefined}>
-                          <option value="">Select a subtheme…</option>
+                          <option value="">Select a subtopic…</option>
                           {subthemes.map((s) => (
                             <option key={s.id} value={s.title}>{s.title}</option>
                           ))}
@@ -297,7 +297,7 @@ export default function Apply() {
                       </div>
                       <ErrorNote id="err-sub" msg={errors.subTopic} />
                       <Link to="/theme" className="uline mt-5 inline-block text-[13px] uppercase tracking-[0.2em] text-graphite">
-                        Read the subthemes →
+                        Read the subtopics →
                       </Link>
                     </div>
 
@@ -314,7 +314,7 @@ export default function Apply() {
                     </div>
 
                     <div>
-                      <Label htmlFor="videoLink" helper="Google Drive link. Ensure sharing is set to 'Anyone with the link'. Max length: 2 minutes.">
+                      <Label htmlFor="videoLink" helper="Google Drive link (max 2 minutes). Describe your topic in the video.">
                         Video link (Google Drive)
                       </Label>
                       <input id="videoLink" name="videoLink" type="url" inputMode="url"

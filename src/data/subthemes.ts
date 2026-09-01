@@ -20,7 +20,7 @@ export const subthemes: Subtheme[] = [
   {
     id: "failure",
     index: "02",
-    title: "The Extraordinary Lesson in Hidden Failure",
+    title: "The Extraordinary Lesson in Failure",
     teaser: "Every finished thing is standing on something that collapsed.",
     body: "We keep our failures in the back rooms — the drafts, the rejected applications, the experiments that went nowhere. Yet almost every competence a person owns was assembled out of those discarded parts. Hidden failure is not the opposite of achievement; it is its unpublished manuscript. Here we open the back room and read what was written there.",
   },

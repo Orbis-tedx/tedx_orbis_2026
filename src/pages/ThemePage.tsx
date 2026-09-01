@@ -68,7 +68,7 @@ export default function ThemePage() {
           >
             <div className="h-px w-16 bg-tedred" />
             <p className="text-[15px] text-white/45">
-              Six subthemes. Six angles on one quiet question.
+              Six subtopics. Six angles on one quiet question.
             </p>
             <Link
               to="/apply"
@@ -101,7 +101,7 @@ export default function ThemePage() {
               <Reveal delay={0.14}>
                 <div className="rule-strong mt-8" />
                 <p className="mt-8 text-[16px] leading-[1.8] text-graphite">
-                  Every subtheme here is a door into the same room, approached from a different wall.
+                  Every subtopic here is a door into the same room, approached from a different wall.
                   All of them ask: what extraordinary thing is hiding inside the thing you have already
                   decided is not worth a second look?
                 </p>
@@ -114,6 +114,16 @@ export default function ThemePage() {
       {/* ── ACCORDION ────────────────────────────────────────────── */}
       <section className="bg-ink">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-20">
+          <div className="mb-8 flex items-center justify-between md:mb-12">
+            <p className="text-[14px] text-white/40 uppercase tracking-[0.15em]">Scroll to explore</p>
+            <motion.div
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="text-white/30 text-xl"
+            >
+              ↓
+            </motion.div>
+          </div>
           <ul className="border-t border-white/12">
             {subthemes.map((s) => {
               const open = openId === s.id;
@@ -170,7 +180,7 @@ export default function ThemePage() {
                                 to="/apply"
                                 className="border border-white/30 px-6 py-2.5 text-[11px] uppercase tracking-[0.26em] text-white/70 transition-all duration-500 hover:border-tedred hover:bg-tedred hover:text-white"
                               >
-                                Apply with this subtheme
+                                Apply with this subtopic
                               </Link>
                               <button
                                 type="button"
@@ -203,11 +213,11 @@ export default function ThemePage() {
               <div className="md:col-span-10 md:col-start-2">
                 <p className="kicker mb-6">A note on choosing</p>
                 <p className="display text-[clamp(1.5rem,3.5vw,2.8rem)] leading-[1.2] tracking-[-0.01em]">
-                  Do not pick the subtheme that sounds most impressive. Pick the one you have already
+                  Do not pick the subtopic that sounds most impressive. Pick the one you have already
                   been thinking about, quietly, for a while.
                 </p>
                 <div className="rule-strong mt-10" />
-                <div className="mt-8">
+                <div className="mt-8 flex flex-col items-start gap-8">
                   <Link
                     to="/apply"
                     className="group inline-flex items-center gap-4 bg-ink px-8 py-4 text-[12px] uppercase tracking-[0.28em] text-paper transition-all duration-500 hover:bg-tedred"
@@ -215,6 +225,13 @@ export default function ThemePage() {
                     Apply to Speak
                     <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
                   </Link>
+                  <motion.div
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="text-ink/40 text-lg"
+                  >
+                    Scroll down for more ↓
+                  </motion.div>
                 </div>
               </div>
             </div>

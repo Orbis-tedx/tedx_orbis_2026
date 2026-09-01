@@ -4,6 +4,15 @@ import mascotImage from "../image_assets/Hero_mascot.png";
 
 type Vec2 = { x: number; y: number };
 
+const welcomeMessages = [
+  "Welcome to The Extra in the Ordinary",
+  "Ready to explore the extraordinary?",
+  "Let's discover what's hiding in the ordinary",
+  "Welcome, idea-maker",
+  "Here to share something extraordinary?",
+  "Let's find the magic in the mundane",
+];
+
 export default function HeroMascot() {
   const reduced = useReducedMotion();
   const container = useRef<HTMLDivElement | null>(null);
@@ -13,6 +22,12 @@ export default function HeroMascot() {
 
   const [pointer, setPointer] = useState<Vec2>({ x: 0.5, y: 0.5 });
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+  const [message, setMessage] = useState(welcomeMessages[0]);
+
+  // Set random welcome message on mount
+  useEffect(() => {
+    setMessage(welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)]);
+  }, []);
 
   // Smooth animation loop
   useEffect(() => {
@@ -101,8 +116,24 @@ export default function HeroMascot() {
       <motion.div style={{ y }} className="relative z-20 flex items-end justify-center w-full h-full">
         <div ref={shadow} className="absolute bottom-8 w-56 md:w-80 lg:w-96 h-10 rounded-full bg-black/40 blur-3xl opacity-60 will-change-transform" style={{ filter: 'blur(28px)' }} />
 
-        <div ref={mascot} className="relative will-change-transform" style={{ transformStyle: 'preserve-3d', transition: reduced ? 'none' : 'transform 0.12s linear' }}>
-          <img src={mascotImage} alt="Mascot" className="block max-h-[420px] w-auto select-none pointer-events-none" />
+        <div className="relative flex flex-col items-center justify-end w-full h-full">
+          {/* Speech bubble */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-6 md:mb-8 relative"
+          >
+            <div className="bg-tedred text-paper px-5 py-3 md:px-6 md:py-4 rounded-lg shadow-lg max-w-xs md:max-w-sm">
+              <p className="text-sm md:text-base font-medium text-center">{message}</p>
+              {/* Tail */}
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-tedred" />
+            </div>
+          </motion.div>
+
+          <div ref={mascot} className="relative will-change-transform" style={{ transformStyle: 'preserve-3d', transition: reduced ? 'none' : 'transform 0.12s linear' }}>
+            <img src={mascotImage} alt="Mascot" className="block max-h-[520px] sm:max-h-[600px] md:max-h-[720px] lg:max-h-[840px] w-auto select-none pointer-events-none" />
+          </div>
         </div>
       </motion.div>
     </div>
