@@ -314,6 +314,17 @@ export default function Apply() {
                     </div>
 
                     <div>
+                      <Label htmlFor="introduction" helper="A brief introduction to how you would present this idea on stage.">
+                        Introduce your talk
+                      </Label>
+                      <textarea id="introduction" name="introduction" rows={6}
+                        className={`field ${errors.introduction ? "field-error" : ""}`}
+                        value={form.introduction} onChange={(e) => set("introduction", e.target.value)}
+                        aria-invalid={!!errors.introduction} aria-describedby={errors.introduction ? "err-introduction" : undefined} />
+                      <ErrorNote id="err-introduction" msg={errors.introduction} />
+                    </div>
+
+                    <div>
                       <Label htmlFor="videoLink" helper="Google Drive link (max 2 minutes). Describe your topic in the video.">
                         Video link (Google Drive)
                       </Label>
