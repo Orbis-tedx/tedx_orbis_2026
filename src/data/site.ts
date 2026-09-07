@@ -10,6 +10,8 @@ const val = (key: string, fallback: string) => {
   return v && v.trim().length > 0 ? v.trim() : fallback;
 };
 
+const configuredSheetsEndpoint = val("VITE_GOOGLE_SHEETS_WEB_APP_URL", "");
+
 export const site = {
   eventName: "TEDxThe Orbis School",
   theme: "The Extra in the Ordinary",
@@ -22,7 +24,7 @@ export const site = {
   linkedin: val("VITE_LINKEDIN_URL", "https://www.linkedin.com/school/the-orbis-school-pune/posts/?feedView=all"),
   facebook: val("VITE_FACEBOOK_URL", "https://www.facebook.com/theorbisschool/"),
   x: val("VITE_X_URL", ""),
-  sheetsEndpoint: val("VITE_GOOGLE_SHEETS_WEB_APP_URL", "https://script.google.com/a/macros/theorbisschool.com/s/AKfycbzsT9fLLwI5OoRghd5hyeoLTbTPf3M4JNnNGO-WSGV1mLBZzPnlpf5pzfaBW3AaXrP-0Q/exec"),
+  sheetsEndpoint: configuredSheetsEndpoint.includes("/a/macros/") ? "" : configuredSheetsEndpoint,
   tedxProgramUrl: "https://www.ted.com/about/programs-initiatives/tedx-program",
   credit: "Made by Tanmay Bhardwaj for The Orbis School",
   licenseLine: "This independent TEDx event is operated under license from TED.",

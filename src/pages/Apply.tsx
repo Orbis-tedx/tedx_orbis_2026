@@ -124,21 +124,23 @@ export default function Apply() {
     setStatus("sending"); setSubmitError("");
     const payload = { timestamp: new Date().toISOString(), ...form };
 
-    if (!site.sheetsEndpoint) {
-      setStatus("error");
-      setSubmitError(`Email your application to ${site.email} — the endpoint isn't configured yet.`);
-      return;
-    }
     try {
-      await fetch(site.sheetsEndpoint, {
-        method: "POST", mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload),
-      });
+      const response = site.sheetsEndpoint
+        ? await fetch(site.sheetsEndpoint, {
+            method: "POST", mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload),
+          })
+        : await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ "form-name": "speaker-application", ...form }).toString(),
+          });
+      if (!site.sheetsEndpoint && !response.ok) throw new Error("Form submission failed");
       setStatus("sent");
     } catch {
       setStatus("error");
-      setSubmitError(`Check your connection and try again, or email us at ${site.email}.`);
+      setSubmitError(`We couldn't send your application. Please try again or email us at ${site.email}.`);
     }
   };
 
@@ -200,7 +202,7 @@ export default function Apply() {
           <div className="grid gap-14 md:grid-cols-12 md:gap-16">
             {/* Fields */}
             <div className="md:col-span-7 lg:col-span-8">
-              <form onSubmit={handleSubmit} noValidate>
+              <form name="speaker-application" onSubmit={handleSubmit} noValidate>
                 <div className="border border-ink/10 p-7 md:p-10">
                   <div className="space-y-10">
                     <div>
