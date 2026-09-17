@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gallery — TEDx: The Extra in The Extraordinary</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ted: '#E62B1E'
+          },
+          fontFamily: {
+            m: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #050505;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #050505;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #E62B1E;
+      border-radius: 3px;
+    }
+
+    ::selection {
+      background: rgba(230, 43, 30, .3);
+      color: #fff;
+    }
+
+    .crop {
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
+    }
+
+    /* Card hover */
+    .hz {
+      transition:
+        transform .5s cubic-bezier(.23,1,.32,1),
+        box-shadow .5s cubic-bezier(.23,1,.32,1);
+      cursor: pointer;
+    }
+
+    .hz:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 60px rgba(230,43,30,.15);
+    }
+
+    /* Image zoom */
+    .iz .crop {
+      transition:
+        transform .6s cubic-bezier(.23,1,.32,1),
+        filter .5s ease;
+    }
+
+    .iz:hover .crop {
+      transform: scale(1.18);
+      filter: brightness(1.1);
+    }
+
+    /* Overlay reveal */
+    .oi {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: all .4s cubic-bezier(.23,1,.32,1);
+    }
+
+    .hz:hover .oi {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Red line */
+    .rl {
+      width: 0;
+      height: 2px;
+      background: #E62B1E;
+      transition: width .5s cubic-bezier(.23,1,.32,1);
+    }
+
+    .hz:hover .rl {
+      width: 44px;
+    }
+
+    /* Sliding animations */
+    @keyframes sL {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes sR {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .sl {
+      animation: sL 45s linear infinite;
+    }
+
+    .sr {
+      animation: sR 50s linear infinite;
+    }
+
+    .st:hover {
+      animation-play-state: paused;
+    }
+
+    /* Header animation */
+    @keyframes fu {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .au {
+      opacity: 0;
+      animation: fu .7s ease forwards;
+    }
+
+    .d1 {
+      animation-delay: .1s;
+    }
+
+    .d2 {
+      animation-delay: .2s;
+    }
+
+    .d3 {
+      animation-delay: .3s;
+    }
+
+    /* Glow */
+    .gl {
+      position: relative;
+    }
+
+    .gl::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      z-index: 0;
+      background: linear-gradient(
+        135deg,
+        #E62B1E,
+        transparent,
+        #E62B1E
+      );
+      opacity: 0;
+      transition: opacity .4s ease;
+      pointer-events: none;
+    }
+
+    .gl:hover::after {
+      opacity: .4;
+    }
+
+    /* Pulse */
+    @keyframes pd {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .5;
+        transform: scale(1.4);
+      }
+    }
+
+    .pd {
+      animation: pd 2s cubic-bezier(.4,0,.6,1) infinite;
+    }
+
+    /* Number badge */
+    .nb {
+      background: rgba(230,43,30,.15);
+      color: #E62B1E;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      padding: 0 6px;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.94);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 1100px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .lightbox-content img {
+      max-height: 78vh;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 14px;
+      margin: auto;
+      box-shadow: 0 30px 100px rgba(0,0,0,.7);
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 24px;
+      top: 20px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+    }
+  </style>
+</head>
+
+<body class="font-m">
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="pt-28 pb-14 md:pt-36 md:pb-20 px-6">
+
+    <div class="max-w-7xl mx-auto text-center">
+
+      <div class="inline-flex items-center gap-2 mb-5 au">
+
+        <span
+          class="w-2 h-2 bg-ted rounded-full pd">
+        </span>
+
+        <span
+          class="text-[10px] font-semibold uppercase tracking-[.2em] text-ted">
+          TEDx Visual Gallery
+        </span>
+
+      </div>
+
+      <h1
+        class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[.95] au d1">
+
+        THE EXTRA IN THE
+        <br>
+
+        <span
+          class="bg-gradient-to-r from-ted to-red-400 bg-clip-text text-transparent">
+          EXTRAORDINARY
+        </span>
+
+      </h1>
+
+      <p
+        class="mt-5 text-neutral-500 text-sm md:text-base font-light max-w-lg mx-auto au d2">
+
+        25 individual posters · 9 core themes ·
+        All in motion — hover to pause, zoom and explore.
+
+      </p>
+
+      <div
+        class="mt-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent au d3">
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= SECTION LABEL ================= -->
+
+  <section class="px-6 pb-6">
+
+    <div
+      class="max-w-7xl mx-auto flex items-center justify-between">
+
+      <div class="flex items-center gap-3">
+
+        <div class="w-8 h-px bg-ted"></div>
+
+        <span
+          class="text-[10px] font-semibold uppercase tracking-[.2em] text-ted">
+          The Gallery — In Motion
+        </span>
+
+      </div>
+
+      <span
+        class="hidden md:inline text-xs text-neutral-600">
+        Hover to pause · Click an image to view
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= ROWS ================= -->
+
+  <div
+    class="overflow-hidden mb-5"
+    id="rowThemes">
+  </div>
+
+  <div
+    class="overflow-hidden mb-5"
+    id="rowA">
+  </div>
+
+  <div
+    class="overflow-hidden"
+    id="rowB">
+  </div>
+
+
+  <!-- ================= BOTTOM MARQUEE ================= -->
+
+  <section
+    class="mt-16 py-4 border-t border-white/5 overflow-hidden">
+
+    <div
+      class="st sr flex items-center gap-6 whitespace-nowrap"
+      style="width:max-content;animation-duration:25s">
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        TEDx
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        The Extra in The Extraordinary
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        25 Posters
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        9 Themes
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        Ideas Worth Spreading
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        TEDx
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        The Extra in The Extraordinary
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        25 Posters
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        9 Themes
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+      <span class="text-[10px] font-semibold uppercase tracking-[.2em] text-neutral-700">
+        Ideas Worth Spreading
+      </span>
+
+      <span class="text-ted text-xs">✦</span>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= LIGHTBOX ================= -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    aria-hidden="true">
+
+    <button
+      class="close-btn"
+      id="closeBtn"
+      aria-label="Close">
+      &times;
+    </button>
+
+    <div class="lightbox-content">
+
+      <img
+        id="lightboxImg"
+        src=""
+        alt="">
+
+      <h2
+        id="lightboxTitle"
+        class="text-xl md:text-2xl font-bold mt-5">
+      </h2>
+
+      <p
+        id="lightboxSubtitle"
+        class="text-sm text-neutral-400 mt-1">
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    (function() {
+
+      /* Composite images */
+
+      var A =
+        'https://z-cdn-media.chatglm.cn/files/4e0a73c5-6277-4bdc-b626-8dae480d0b8e.png?auth_key=1886897692-0015dc8af6b943a4ac3acde667ecff24-0-2e7adf01bca729d04dcfafabaf9421e1';
+
+      var B =
+        'https://z-cdn-media.chatglm.cn/files/c699a695-ad41-490c-8b38-bf77a5f4e460.png?auth_key=1886897692-93ff51d4f9674d82b0d2f0f644b2687e-0-34157bbdd76849516528befc6cfbf8e4';
+
+
+      /* ================= 9 THEMES ================= */
+
+      var T = [
+
+        {
+          r: 0,
+          c: 0,
+          t: 'The Red Sphere',
+          s: 'Anomaly in the landscape'
+        },
+
+        {
+          r: 0,
+          c: 1,
+          t: 'Among Umbrellas',
+          s: 'Standing out in the rain'
+        },
+
+        {
+          r: 0,
+          c: 2,
+          t: 'Holding the Star',
+          s: 'Reaching for the light'
+        },
+
+        {
+          r: 1,
+          c: 0,
+          t: 'The Stage',
+          s: 'Circle of ideas'
+        },
+
+        {
+          r: 1,
+          c: 1,
+          t: 'The Red Boat',
+          s: 'Crafted by hand'
+        },
+
+        {
+          r: 1,
+          c: 2,
+          t: 'Child & The Light',
+          s: 'Wonder is the spark'
+        },
+
+        {
+          r: 2,
+          c: 0,
+          t: 'The Different Move',
+          s: 'Changing the game'
+        },
+
+        {
+          r: 2,
+          c: 1,
+          t: 'Standing Forward',
+          s: 'One step ahead'
+        },
+
+        {
+          r: 2,
+          c: 2,
+          t: 'The Color Burst',
+          s: 'Shattering the ordinary'
+        }
+
+      ];
+
+
+      /* ================= 25 POSTERS ================= */
+
+      var P = [
+
+        {
+          r: 0,
+          c: 0,
+          t: 'Red Umbrella',
+          s: 'Standing out in the rain'
+        },
+
+        {
+          r: 0,
+          c: 1,
+          t: 'Lightbulb',
+          s: 'Illuminating the dark'
+        },
+
+        {
+          r: 0,
+          c: 2,
+          t: 'Red Flower',
+          s: 'Blooming against gray'
+        },
+
+        {
+          r: 0,
+          c: 3,
+          t: 'Mountain Figure',
+          s: 'Rising above everything'
+        },
+
+        {
+          r: 0,
+          c: 4,
+          t: 'Paper Airplane',
+          s: 'Defying gravity simply'
+        },
+
+        {
+          r: 1,
+          c: 0,
+          t: 'The Match',
+          s: 'One spark, infinite fire'
+        },
+
+        {
+          r: 1,
+          c: 1,
+          t: 'Hot Air Balloon',
+          s: 'Soaring beyond limits'
+        },
+
+        {
+          r: 1,
+          c: 2,
+          t: 'The Stairway',
+          s: 'Every step is extra'
+        },
+
+        {
+          r: 1,
+          c: 3,
+          t: 'The Crowd',
+          s: 'Unity in multiplicity'
+        },
+
+        {
+          r: 1,
+          c: 4,
+          t: 'Red Sphere',
+          s: 'Anomaly in the landscape'
+        },
+
+        {
+          r: 2,
+          c: 0,
+          t: 'Summit Star',
+          s: 'Reaching for the light'
+        },
+
+        {
+          r: 2,
+          c: 1,
+          t: 'The Stage',
+          s: 'Circle of ideas'
+        },
+
+        {
+          r: 2,
+          c: 2,
+          t: 'Red Boat',
+          s: 'Crafted by hand'
+        },
+
+        {
+          r: 2,
+          c: 3,
+          t: 'Child & Light',
+          s: 'Wonder is the spark'
+        },
+
+        {
+          r: 2,
+          c: 4,
+          t: 'Red Chess Piece',
+          s: 'Changing the game'
+        },
+
+        {
+          r: 3,
+          c: 0,
+          t: 'Standing Forward',
+          s: 'One step ahead'
+        },
+
+        {
+          r: 3,
+          c: 1,
+          t: 'Color Burst',
+          s: 'Shattering the ordinary'
+        },
+
+        {
+          r: 3,
+          c: 2,
+          t: 'Red Field',
+          s: 'Color in every direction'
+        },
+
+        {
+          r: 3,
+          c: 3,
+          t: 'Stepping Stones',
+          s: 'Each stone a decision'
+        },
+
+        {
+          r: 3,
+          c: 4,
+          t: 'Open Book',
+          s: 'Stories yet untold'
+        },
+
+        {
+          r: 4,
+          c: 0,
+          t: 'The Compass',
+          s: 'Finding new direction'
+        },
+
+        {
+          r: 4,
+          c: 1,
+          t: 'The Key',
+          s: 'Unlocking the hidden'
+        },
+
+        {
+          r: 4,
+          c: 2,
+          t: 'The Bridge',
+          s: 'Connecting impossibles'
+        },
+
+        {
+          r: 4,
+          c: 3,
+          t: 'The Telescope',
+          s: 'Seeing further than most'
+        },
+
+        {
+          r: 4,
+          c: 4,
+          t: 'The Spark',
+          s: 'Where extraordinary begins'
+        }
+
+      ];
+
+
+      /* ================= CARD BUILDER ================= */
+
+      function card(o) {
+
+        var sx = o.cols * 100;
+        var sy = o.rows * 100;
+
+        var px =
+          o.cols > 1
+            ? (o.c / (o.cols - 1)) * 100
+            : 0;
+
+        var py =
+          o.rows > 1
+            ? (o.r / (o.rows - 1)) * 100
+            : 0;
+
+        var n =
+          String(o.num).padStart(2, '0');
+
+
+        return (
+
+          '<div ' +
+
+            'class="hz iz relative rounded-2xl overflow-hidden ' +
+            'border border-white/5 gl w-[280px] h-[200px] ' +
+            'md:w-[380px] md:h-[260px] flex-shrink-0"' +
+
+            ' data-img="' + o.img + '"' +
+            ' data-title="' + o.t + '"' +
+            ' data-subtitle="' + o.s + '"' +
+
+          '>' +
+
+            '<div ' +
+              'class="crop absolute inset-0"' +
+              'style="background-image:url(\'' +
+                o.img +
+              '\');background-size:' +
+                sx +
+              '% ' +
+                sy +
+              '%;background-position:' +
+                px +
+              '% ' +
+                py +
+              '%"' +
+            '></div>' +
+
+            '<div ' +
+              'class="absolute inset-0 bg-gradient-to-t ' +
+              'from-black/80 via-black/20 to-transparent"' +
+            '></div>' +
+
+            '<div ' +
+              'class="absolute top-3 left-3 nb">' +
+              n +
+            '</div>' +
+
+            '<div ' +
+              'class="absolute bottom-0 left-0 right-0 ' +
+              'p-4 md:p-5" style="z-index:2"' +
+            '>' +
+
+              '<div class="rl mb-2"></div>' +
+
+              '<p ' +
+                'class="text-[10px] font-semibold uppercase ' +
+                'tracking-widest text-ted">' +
+                o.s +
+              '</p>' +
+
+              '<h3 ' +
+                'class="text-sm md:text-base font-bold ' +
+                'tracking-tight mt-0.5">' +
+                o.t +
+              '</h3>' +
+
+              '<p ' +
+                'class="oi text-xs text-neutral-400 mt-1">' +
+                'Click to view full poster' +
+              '</p>' +
+
+            '</div>' +
+
+          '</div>'
+
+        );
+
+      }
+
+
+      /* ================= BUILD ROW ================= */
+
+      function buildRow(
+        elId,
+        items,
+        direction,
+        dur
+      ) {
+
+        var html =
+          '<div ' +
+          'class="st ' +
+          direction +
+          ' flex gap-4" ' +
+          'style="width:max-content;' +
+          'animation-duration:' +
+          dur +
+          's">';
+
+
+        for (
+          var pass = 0;
+          pass < 2;
+          pass++
+        ) {
+
+          for (
+            var i = 0;
+            i < items.length;
+            i++
+          ) {
+
+            html += card(items[i]);
+
+          }
+
+        }
+
+
+        html += '</div>';
+
+        document.getElementById(elId).innerHTML =
+          html;
+
+      }
+
+
+      /* ================= ROW 1 ================= */
+
+      var themeItems =
+        T.map(function(x, i) {
+
+          return {
+
+            img: B,
+
+            cols: 3,
+
+            rows: 3,
+
+            r: x.r,
+
+            c: x.c,
+
+            num: i + 1,
+
+            t: x.t,
+
+            s: x.s
+
+          };
+
+        });
+
+
+      buildRow(
+        'rowThemes',
+        themeItems,
+        'sl',
+        35
+      );
+
+
+      /* ================= ROW 2 ================= */
+
+      var postA =
+        P.slice(0, 13)
+        .map(function(x, i) {
+
+          return {
+
+            img: A,
+
+            cols: 5,
+
+            rows: 5,
+
+            r: x.r,
+
+            c: x.c,
+
+            num: i + 1,
+
+            t: x.t,
+
+            s: x.s
+
+          };
+
+        });
+
+
+      buildRow(
+        'rowA',
+        postA,
+        'sr',
+        45
+      );
+
+
+      /* ================= ROW 3 ================= */
+
+      var postB =
+        P.slice(13)
+        .map(function(x, i) {
+
+          return {
+
+            img: A,
+
+            cols: 5,
+
+            rows: 5,
+
+            r: x.r,
+
+            c: x.c,
+
+            num: i + 14,
+
+            t: x.t,
+
+            s: x.s
+
+          };
+
+        });
+
+
+      buildRow(
+        'rowB',
+        postB,
+        'sl',
+        40
+      );
+
+
+      /* ================= PAUSE ON HOVER ================= */
+
+      document
+        .querySelectorAll('.st')
+        .forEach(function(t) {
+
+          t.addEventListener(
+            'mouseenter',
+            function() {
+
+              t.style.animationPlayState =
+                'paused';
+
+            }
+          );
+
+          t.addEventListener(
+            'mouseleave',
+            function() {
+
+              t.style.animationPlayState =
+                'running';
+
+            }
+          );
+
+        });
+
+
+      /* ================= LIGHTBOX ================= */
+
+      var lightbox =
+        document.getElementById('lightbox');
+
+      var lbImg =
+        document.getElementById('lightboxImg');
+
+      var lbTitle =
+        document.getElementById('lightboxTitle');
+
+      var lbSubtitle =
+        document.getElementById('lightboxSubtitle');
+
+
+      document.addEventListener(
+        'click',
+        function(e) {
+
+          var cardEl =
+            e.target.closest('.hz');
+
+
+          if (cardEl) {
+
+            lbImg.src =
+              cardEl.dataset.img;
+
+            lbImg.alt =
+              cardEl.dataset.title;
+
+            lbTitle.textContent =
+              cardEl.dataset.title;
+
+            lbSubtitle.textContent =
+              cardEl.dataset.subtitle;
+
+
+            lightbox.classList.add(
+              'active'
+            );
+
+            lightbox.setAttribute(
+              'aria-hidden',
+              'false'
+            );
+
+          }
+
+        }
+      );
+
+
+      /* ================= CLOSE LIGHTBOX ================= */
+
+      function closeLightbox() {
+
+        lightbox.classList.remove(
+          'active'
+        );
+
+        lightbox.setAttribute(
+          'aria-hidden',
+          'true'
+        );
+
+        lbImg.src = '';
+
+      }
+
+
+      document
+        .getElementById('closeBtn')
+        .addEventListener(
+          'click',
+          closeLightbox
+        );
+
+
+      lightbox.addEventListener(
+        'click',
+        function(e) {
+
+          if (e.target === lightbox) {
+
+            closeLightbox();
+
+          }
+
+        }
+      );
+
+
+      document.addEventListener(
+        'keydown',
+        function(e) {
+
+          if (e.key === 'Escape') {
+
+            closeLightbox();
+
+          }
+
+        }
+      );
+
+
+    })();
+
+  </script>
+
+</body>
+</html>
