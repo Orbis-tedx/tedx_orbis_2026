@@ -7,7 +7,6 @@ import HeroMascot from "../components/HeroMascot";
 import Wordmark from "../components/Wordmark";
 import { subthemes } from "../data/subthemes";
 import { prettyDate, site } from "../data/site";
-import guidelinesUrl from "../assets/speaker_guidlines.pdf";
 
  
 
@@ -132,7 +131,7 @@ export default function Home() {
                   Explore the theme →
                 </Link>
                 <a
-                  href={guidelinesUrl}
+                  href={site.speakerGuidelinesUrl}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="inline-flex items-center gap-3 border border-paper/40 px-5 py-3 text-[14px] font-semibold uppercase tracking-[0.12em] text-paper transition-colors duration-500 hover:border-tedred hover:bg-tedred"

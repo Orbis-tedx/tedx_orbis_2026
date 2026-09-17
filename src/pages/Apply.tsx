@@ -5,7 +5,6 @@ import PageShell from "../components/PageShell";
 import { subthemes } from "../data/subthemes";
 import { quotes } from "../data/quotes";
 import { site } from "../data/site";
-import guidelinesUrl from "../assets/speaker_guidlines.pdf";
 
 /* ─── Form model ──────────────────────────────────────────────── */
 type FieldKey =
@@ -379,7 +378,7 @@ export default function Apply() {
                   Speakers never pay to join a TEDx event. Coaching and attendance are free.
                 </p>
                 <a
-                  href={guidelinesUrl}
+                  href={site.speakerGuidelinesUrl}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="mt-8 inline-flex items-center gap-3 border border-ink/30 px-5 py-3 text-[14px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors duration-500 hover:border-tedred hover:bg-tedred hover:text-paper"

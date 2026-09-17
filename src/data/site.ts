@@ -25,6 +25,7 @@ export const site = {
   linkedin: val("VITE_LINKEDIN_URL", "https://www.linkedin.com/school/the-orbis-school-pune/posts/?feedView=all"),
   facebook: val("VITE_FACEBOOK_URL", "https://www.facebook.com/theorbisschool/"),
   x: val("VITE_X_URL", ""),
+  speakerGuidelinesUrl: "https://drive.google.com/file/d/1Zu4yuVU9WziG0dWZ0BzGxcWb0s4OUfMH/view?usp=sharing",
   sheetsEndpoint: configuredSheetsEndpoint.includes("/a/macros/") ? "" : configuredSheetsEndpoint,
   tedxProgramUrl: "https://www.ted.com/about/programs-initiatives/tedx-program",
   credit: "Made by Tanmay Bhardwaj for The Orbis School",
