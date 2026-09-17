@@ -84,6 +84,17 @@ export default function Contact() {
                   note="General enquiries, press, accessibility. Reply within three working days."
                 />
               </Reveal>
+
+              <Reveal delay={0.14}>
+                <div className="mt-8 border border-ink/10 p-8">
+                  <p className="kicker">The Orbis School</p>
+                  <p className="mt-5 text-[16px] leading-[1.8]">
+                    Email: <a className="text-tedred underline" href={`mailto:${site.email}`}>{site.email}</a><br />
+                    Telephone: <a className="text-tedred underline" href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}>{site.phone}</a><br />
+                    WhatsApp: {site.whatsapp}
+                  </p>
+                </div>
+              </Reveal>
               <Reveal delay={0.06}>
                 <RevealLine
                   label="Telephone"

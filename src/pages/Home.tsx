@@ -7,6 +7,7 @@ import HeroMascot from "../components/HeroMascot";
 import Wordmark from "../components/Wordmark";
 import { subthemes } from "../data/subthemes";
 import { prettyDate, site } from "../data/site";
+import guidelinesUrl from "../assets/speaker_guidlines.pdf";
 
  
 
@@ -69,7 +70,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1.2, delay: 0.1 }}
             >
-              TEDxThe Orbis School — independently organized
+              TEDxThe Orbis School — independently organised
             </motion.p>
 
             <motion.h1
@@ -130,6 +131,14 @@ export default function Home() {
                 >
                   Explore the theme →
                 </Link>
+                <a
+                  href={guidelinesUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-3 border border-paper/40 px-5 py-3 text-[14px] font-semibold uppercase tracking-[0.12em] text-paper transition-colors duration-500 hover:border-tedred hover:bg-tedred"
+                >
+                  Speaker guidelines <span aria-hidden="true">↗</span>
+                </a>
               </div>
             </motion.div>
           </div>

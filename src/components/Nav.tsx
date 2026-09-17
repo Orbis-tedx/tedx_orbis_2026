@@ -6,6 +6,8 @@ import Wordmark from "./Wordmark";
 const links = [
   { to: "/",       label: "Home" },
   { to: "/theme",  label: "Theme" },
+  { to: "/about",  label: "About" },
+  { to: "/gallery",label: "Gallery" },
   { to: "/contact",label: "Contact" },
 ];
 
@@ -40,7 +42,7 @@ export default function Nav() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
+            <nav className="hidden items-center gap-6 lg:gap-8 md:flex" aria-label="Primary">
             {links.map((l) => (
               <NavLink
                 key={l.to} to={l.to} end={l.to === "/"}
@@ -91,7 +93,7 @@ export default function Nav() {
                   <NavLink
                     key={l.to} to={l.to} end={l.to === "/"}
                     className={({ isActive }) =>
-                      `border-b border-white/10 py-4 text-2xl ${isActive ? "text-tedred" : "text-white/70"}`
+                      `border-b border-white/10 py-4 text-xl ${isActive ? "text-tedred" : "text-white/70"}`
                     }
                   >
                     {l.label}

@@ -19,7 +19,11 @@ export default function Footer() {
             <Link to="/" className="text-2xl text-paper md:text-3xl">
               <Wordmark className="text-paper" />
             </Link>
-            <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-white/40">
+            <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-white/65">
+              The Orbis School
+              <br />
+              Pune, Maharashtra, India
+              <br />
               {site.theme} — {prettyDate}
               {site.venue && (
                 <>
@@ -32,16 +36,18 @@ export default function Footer() {
 
           {/* Pages */}
           <nav className="md:col-span-3" aria-label="Footer">
-            <p className="kicker text-white/30 mb-5">Pages</p>
+            <p className="kicker text-white/60 mb-5">Pages</p>
             <ul className="space-y-2 text-[14px]">
               {[
                 { to: "/",       label: "Home" },
                 { to: "/apply",  label: "Speaker Registration" },
                 { to: "/theme",  label: "Theme" },
+                { to: "/about",  label: "About" },
+                { to: "/gallery", label: "Gallery" },
                 { to: "/contact",label: "Contact" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-white/45 transition-colors duration-500 hover:text-white">
+                  <Link to={l.to} className="text-white/70 transition-colors duration-500 hover:text-white">
                     {l.label}
                   </Link>
                 </li>
@@ -51,8 +57,8 @@ export default function Footer() {
 
           {/* Social + email */}
           <div className="md:col-span-4">
-            <p className="kicker text-white/30 mb-5">Elsewhere</p>
-            <div className="flex items-center gap-5 text-white/40">
+            <p className="kicker text-white/60 mb-5">Elsewhere</p>
+            <div className="flex items-center gap-5 text-white/70">
               {socials.map(({ href, label, Glyph }) => (
                 <a
                   key={label} href={href} target="_blank" rel="noreferrer noopener"
@@ -63,16 +69,22 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <p className="mt-6 text-[14px] text-white/40">
+            <div className="mt-6 space-y-2 text-[14px] text-white/70">
               <a href={`mailto:${site.email}`} className="transition-colors hover:text-white">
                 {site.email}
               </a>
-            </p>
+              <p>
+                <a href={`tel:${site.phone.replace(/[^\d+]/g, "")}`} className="transition-colors hover:text-white">
+                  {site.phone}
+                </a>
+              </p>
+              <p>WhatsApp: {site.whatsapp}</p>
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-[11px] tracking-wide text-white/25 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-[11px] tracking-wide text-white/55 md:flex-row md:items-center md:justify-between">
           <p>{site.licenseLine}</p>
           <p>{site.credit}</p>
         </div>

@@ -8,6 +8,8 @@ import Apply from "./pages/Apply";
 import ThemePage from "./pages/ThemePage";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
+import Gallery from "./pages/Gallery";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,6 +28,8 @@ function AnimatedRoutes() {
         <Route path="/apply" element={<Apply />} />
         <Route path="/theme" element={<ThemePage />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
