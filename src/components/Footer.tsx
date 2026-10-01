@@ -44,6 +44,7 @@ export default function Footer() {
                 { to: "/theme",  label: "Theme" },
                 { to: "/about",  label: "About" },
                 { to: "/gallery", label: "Gallery" },
+                { to: "/panelists", label: "Panelists" },
                 { to: "/contact",label: "Contact" },
               ].map((l) => (
                 <li key={l.to}>
