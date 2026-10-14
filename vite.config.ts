@@ -18,12 +18,20 @@ export default defineConfig({
       name: "publish-static-pages",
       generateBundle() {
         for (const page of ["About", "Gallery"]) {
+          const source = fs.readFileSync(path.resolve(__dirname, `src/pages/${page}.html`), "utf8");
           this.emitFile({
             type: "asset",
             fileName: `${page.toLowerCase()}.html`,
-            source: fs.readFileSync(path.resolve(__dirname, `src/pages/${page}.html`), "utf8"),
+            source: page === "About"
+              ? source.replace("../image_assets/logo/logo-black.png", "./logo-black.png")
+              : source,
           });
         }
+        this.emitFile({
+          type: "asset",
+          fileName: "logo-black.png",
+          source: fs.readFileSync(path.resolve(__dirname, "src/image_assets/logo/logo-black.png")),
+        });
       },
     },
     viteSingleFile(),

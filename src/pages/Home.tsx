@@ -348,7 +348,7 @@ export default function Home() {
           </div>
           <div className="rule mt-20 border-white/10" />
           <p className="mt-6 text-[12px] text-white/25">
-            <Wordmark className="mr-2" /> {site.licenseLine}
+            <Wordmark size="inline" className="mr-2 align-middle" /> {site.licenseLine}
           </p>
         </div>
       </section>

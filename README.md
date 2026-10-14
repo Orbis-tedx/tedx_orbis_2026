@@ -20,7 +20,7 @@ A four-page editorial website for TEDxThe Orbis School:
 
 There are **no other pages**. (`/*` renders a small “dead end” fallback that links back to the four routes — it is not a content page.)
 
-TED brand rules are respected: no TED logo, no TED conference imagery, no sponsor logos, no advertising. The wordmark is set in type only.
+The supplied TEDxThe Orbis School Youth logo is used consistently across the site. TED conference imagery, sponsor logos, and advertising are not used.
 
 ---
 

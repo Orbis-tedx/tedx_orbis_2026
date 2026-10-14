@@ -17,7 +17,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <Link to="/" className="text-2xl text-paper md:text-3xl">
-              <Wordmark className="text-paper" />
+              <Wordmark size="footer" />
             </Link>
             <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-white/65">
               The Orbis School

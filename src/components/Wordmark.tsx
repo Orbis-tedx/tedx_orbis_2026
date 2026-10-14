@@ -1,17 +1,17 @@
-type Props = { className?: string; sub?: boolean };
+import logo from "../image_assets/logo/logo-black.png";
 
-/**
- * The event's own wordmark treatment. No TED logo or TED conference imagery
- * is used anywhere on this site, per TED brand rules — this is set in type.
- */
-export default function Wordmark({ className = "", sub = true }: Props) {
+type Props = { className?: string; size?: "nav" | "footer" | "inline" };
+
+const sizes = {
+  nav: "h-10 w-28",
+  footer: "h-16 w-40",
+  inline: "h-6 w-14",
+};
+
+export default function Wordmark({ className = "", size = "nav" }: Props) {
   return (
-    <span className={`inline-flex items-baseline leading-none ${className}`}>
-      <span className="tracking-[-0.03em]">TED</span>
-      <span className="text-tedred tracking-[-0.03em]">x</span>
-      {sub && (
-        <span className="ml-[0.35em] tracking-[-0.01em] font-normal">The&nbsp;Orbis&nbsp;School</span>
-      )}
+    <span className={`inline-flex shrink-0 items-center justify-center overflow-hidden rounded-sm bg-white ${sizes[size]} ${className}`}>
+      <img className="h-full w-full object-contain" src={logo} alt="TEDx The Orbis School Youth" />
     </span>
   );
 }

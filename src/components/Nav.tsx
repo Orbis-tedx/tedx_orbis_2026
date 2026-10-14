@@ -38,7 +38,7 @@ export default function Nav() {
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 md:px-10">
           <Link to="/" className="group text-[15px] md:text-[16px]" aria-label="TEDxThe Orbis School — home">
             <span className={`transition-opacity duration-500 group-hover:opacity-60 ${isHome && !scrolled ? "text-paper" : "text-paper"}`}>
-              <Wordmark className="text-paper" />
+              <Wordmark size="nav" />
             </span>
           </Link>
 
