@@ -9,16 +9,20 @@ An independently organised TED event at The Orbis School, Pune, India.
 
 ## 1. Overview
 
-A four-page editorial website for TEDxThe Orbis School:
+A multi-page editorial website for TEDxThe Orbis School:
 
-| # | Route      | Page                  | What's on it |
-|---|------------|-----------------------|--------------|
-| 1 | `/`        | Home                  | 3D hero, theme statement, six subtheme teasers, the required “What is TEDx?” text, organising team, closing CTA |
-| 2 | `/apply`   | Speaker Registration  | Eight-step guided application → Google Sheets |
-| 3 | `/theme`   | Theme                 | Typographic opening + accordion of the six subthemes |
-| 4 | `/contact` | Contact               | Masthead-style contact index, venue card, social links, site map |
+| Route | Page | What's on it |
+|-------|------|--------------|
+| `/` | Home | 3D hero, theme statement, six subtheme teasers, the required “What is TEDx?” text, organising team, closing CTA |
+| `/apply` | Speaker Registration | Eight-step guided application → Google Sheets |
+| `/theme` | Theme | Typographic opening + accordion of the six subthemes |
+| `/about` | About | About the event and school |
+| `/gallery` | Gallery | Event gallery |
+| `/speakers` | Speakers | Finalist lineups, posters, and speaker names |
+| `/panelists` | Panelists | Profiles of the selection panel |
+| `/contact` | Contact | Masthead-style contact index, venue card, social links, site map |
 
-There are **no other pages**. (`/*` renders a small “dead end” fallback that links back to the four routes — it is not a content page.)
+Unknown routes render a small “dead end” fallback that links back to the main pages.
 
 The supplied TEDxThe Orbis School Youth logo is used consistently across the site. TED conference imagery, sponsor logos, and advertising are not used.
 
@@ -57,7 +61,8 @@ The supplied TEDxThe Orbis School Youth logo is used consistently across the sit
     │   ├── quotes.ts               # quotes shown in the application form
     │   └── site.ts                 # env-driven config with safe fallbacks
     └── pages
-        ├── Home.tsx  Apply.tsx  ThemePage.tsx  Contact.tsx  NotFound.tsx
+        ├── Home.tsx  Apply.tsx  ThemePage.tsx  Speakers.tsx
+        ├── Panelists.tsx  About.tsx  Gallery.tsx  Contact.tsx  NotFound.tsx
 ```
 
 ---

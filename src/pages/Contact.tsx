@@ -177,12 +177,13 @@ export default function Contact() {
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-20">
           <Reveal>
             <p className="kicker">Everything on this site</p>
-            <ul className="mt-8 grid gap-px bg-ink/8 sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="mt-8 grid gap-px bg-ink/8 sm:grid-cols-2 lg:grid-cols-5">
               {[
                 { to: "/",       n: "01", label: "Home",                  note: "The event, theme, team" },
                 { to: "/apply",  n: "02", label: "Speaker Registration", note: "Eight steps, no fee" },
-                { to: "/theme",  n: "03", label: "Theme",                note: "Six subthemes in full" },
-                { to: "/contact",n: "04", label: "Contact",              note: "You are here" },
+                { to: "/speakers", n: "03", label: "Speakers",            note: "Meet the finalist speakers" },
+                { to: "/theme",  n: "04", label: "Theme",                note: "Six subthemes in full" },
+                { to: "/contact",n: "05", label: "Contact",              note: "You are here" },
               ].map((l) => (
                 <li key={l.to} className="bg-paper-deep">
                   <Link to={l.to} className="group block border-t border-ink/10 p-6">

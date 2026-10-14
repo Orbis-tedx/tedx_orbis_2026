@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Panelists from "./pages/Panelists";
+import Speakers from "./pages/Speakers";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,6 +33,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/panelists" element={<Panelists />} />
+        <Route path="/speakers" element={<Speakers />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

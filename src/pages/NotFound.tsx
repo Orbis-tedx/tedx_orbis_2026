@@ -12,11 +12,13 @@ export default function NotFound() {
           </h1>
           <div className="mt-8 h-px w-16 bg-tedred" />
           <p className="mt-8 max-w-lg text-[16px] leading-relaxed text-white/50">
-            This address doesn't exist. The site has four pages — all one click away.
+            This address doesn't exist. There are plenty of other ideas worth discovering.
           </p>
           <div className="mt-10 flex flex-wrap gap-6 text-[14px]">
             {[
               { to: "/",       label: "Home" },
+              { to: "/speakers", label: "Speakers" },
+              { to: "/panelists", label: "Panelists" },
               { to: "/apply",  label: "Speaker Registration" },
               { to: "/theme",  label: "Theme" },
               { to: "/contact",label: "Contact" },
