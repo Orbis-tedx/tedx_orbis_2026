@@ -253,5 +253,5 @@ No image reference can render broken: every placeholder is styled, and the team 
 
 ## 11. Credits
 
-**Made by Tanmay Bhardwaj for The Orbis School.**
+**Made by Tanmay Bhardwaj, Svanik Maharatha, Enosh Bhatra & Sachit Gupta for The Orbis School.**
 This independent TEDx event is operated under license from TED.
