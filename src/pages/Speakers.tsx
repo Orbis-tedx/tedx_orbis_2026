@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import PageShell from "../components/PageShell";
 import Reveal from "../components/Reveal";
-import lineupOneImage from "../image_assets/speakers/Speakers1.jpeg";
-import lineupTwoImage from "../image_assets/speakers/speakers2.jpeg";
+import lineupOneImage from "../image_assets/speakers/Speakers2.jpeg";
+import lineupTwoImage from "../image_assets/speakers/speakers1.jpeg";
 
 const lineups = [
   {
