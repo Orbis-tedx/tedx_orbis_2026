@@ -3,7 +3,11 @@
 **Theme: “The Extra in the Ordinary”**
 An independently organised TED event at The Orbis School, Pune, India.
 
+<<<<<<< HEAD
 *Made by Tanmay Bhardwaj, Svanik Maharatha, Enosh Bhatra, and Sachit Gupta for The Orbis School.*
+=======
+*Made by Tanmay Bhardwaj, Svanik Maharatha, Enosh Bhatra & Sachit Gupta for The Orbis School.*
+>>>>>>> 23358db96df294ff2321ac558b7e0e44046cd958
 
 ---
 
@@ -253,5 +257,9 @@ No image reference can render broken: every placeholder is styled, and the team 
 
 ## 11. Credits
 
+<<<<<<< HEAD
 **Made by Tanmay Bhardwaj, Svanik Maharatha, Enosh Bhatra, and Sachit Gupta for The Orbis School.**
+=======
+**Made by Tanmay Bhardwaj, Svanik Maharatha, Enosh Bhatra & Sachit Gupta for The Orbis School.**
+>>>>>>> 23358db96df294ff2321ac558b7e0e44046cd958
 This independent TEDx event is operated under license from TED.
