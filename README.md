@@ -216,7 +216,7 @@ If you prefer a readable response, deploy the script and call it *without* `no-c
 
 The app uses **`HashRouter`** (`/#/theme`, `/#/apply`, …). This guarantees that every route resolves on a direct visit or hard refresh on *any* static host — no server rewrite required. `vercel.json` and `netlify.toml` rewrites are also included, so if you switch `HashRouter` → `BrowserRouter` in `src/App.tsx` deep links will still work on Vercel/Netlify.
 
-**Vercel:** import the repo → Framework preset “Vite” → build `npm run build`, output `dist` → add env vars → Deploy.
+**Vercel:** import the repo with the Vite framework preset, build command `npm run build`, and output directory `dist`. Vite 7 requires Node.js `20.19+` or `22.12+`; the `engines` setting in `package.json` declares supported versions. The local `.env` file is intentionally git-ignored and is not uploaded: add `VITE_GOOGLE_SHEETS_WEB_APP_URL` in Vercel's Project Settings → Environment Variables for each environment that should accept speaker applications, then redeploy. Add any optional `VITE_*` overrides there too. Never commit `.env` or put secrets in `VITE_*` variables because Vite embeds them in client-side files.
 **Netlify:** New site from Git → build `npm run build`, publish `dist` → add env vars → Deploy. (`netlify.toml` already sets this.)
 
 ---
